@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register</title>
+  <link rel="stylesheet" href="newregister.css">
+</head>
+<body>
+  <section id="register" tabindex="0">
+    <h2 data-tts="Register for Inclusive Education Platform">Register</h2>
+    <form id="registration-form" action="/register" method="POST">
+      <label for="name" data-tts="Enter your name">Name:</label>
+      <input type="text" id="name" name="name" placeholder="Enter your full name" required />
+
+      <label for="email" data-tts="Enter your email">Email:</label>
+      <input type="email" id="email" name="email" placeholder="Enter your email address" required />
+
+      <label for="phone" data-tts="Enter your phone number">Phone:</label>
+      <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required />
+
+      <label for="password" data-tts="Enter your password">Password:</label>
+      <input type="password" id="password" name="password" placeholder="Enter your password" required />
+
+      <label for="role" data-tts="Select your role">Role:</label>
+      <select id="role" name="role" required>
+        <option value="blind" data-tts="Visually impaired">Visually Impaired</option>
+        <option value="deaf" data-tts="Hearing impaired">Hearing Impaired</option>
+        <option value="autism" data-tts="Autistic">Autistic</option>
+      </select>
+
+      <button type="submit" data-tts="Submit your registration">Submit</button>
+    </form>
+  </section>
+
+  <script>
+    const synth = window.speechSynthesis;
+
+    function speakText(text) {
+      if (synth.speaking) synth.cancel();
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.rate = 1;
+      synth.speak(utterance);
+    }
+
+    document.querySelectorAll("[data-tts]").forEach(element => {
+      element.addEventListener("click", () => {
+        const text = element.getAttribute("data-tts");
+        speakText(text);
+      });
+
+      element.addEventListener("focus", () => {
+        const text = element.getAttribute("data-tts");
+        speakText(text);
+      });
+    });
+
+    document.addEventListener("keydown", (event) => {
+      let key = event.key;
+
+      const specialKeys = {
+        ".": "dot",
+        ",": "comma",
+        "@": "at",
+        "#": "hash",
+        "$": "dollar",
+        "%": "percent",
+        "&": "ampersand",
+        "*": "asterisk",
+        "(": "opening parenthesis",
+        ")": "closing parenthesis",
+        "-": "dash",
+        "_": "underscore",
+        "=": "equals",
+        "+": "plus",
+        "/": "slash",
+        "\\": "backslash",
+        "|": "vertical bar",
+        ";": "semicolon",
+        ":": "colon",
+        "'": "single quote",
+        "\"": "double quote",
+        "?": "question mark",
+        "!": "exclamation mark",
+      };
+
+      const spokenText = specialKeys[key] || key;
+      speakText(spokenText);
+    });
+  </script>
+  <script src="newregister.js"></script>
+</body>
+</html>

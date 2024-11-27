@@ -1,0 +1,35 @@
+#register {
+  background: #f4f4f4;
+  padding: 2em;
+  margin-top: 2em;
+  border-radius: 8px;
+}
+
+#registration-form {
+  display: flex;
+  flex-direction: column;
+}
+
+#registration-form label {
+  margin: 10px 0 5px;
+}
+
+#registration-form input, #registration-form select {
+  padding: 0.5em;
+  margin-bottom: 1em;
+  width: 100%;
+  border-radius: 5px;
+}
+
+#registration-form button {
+  padding: 0.7em;
+  background-color: #fa724c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#registration-form button:hover {
+  background-color:#fa724c ;
+}

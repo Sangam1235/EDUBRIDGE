@@ -1,0 +1,168 @@
+body {
+  font-family: Arial;
+  margin:0;
+  padding:0;
+  background: linear-gradient(to top,rgba(0,0,0,0.5)50%,rgba(0,0,0,0.5)50%),url(/photos/disable.webp);
+  background-size: cover;
+}
+.paragraph{
+  text-shadow: 1px 1px 2px black;
+  color:white;
+  font-size: 22px;
+  font-weight: 400;
+}
+
+.heading{
+  font-size: 28px;
+  font-weight: 800;
+  text-shadow: 1px 1px 2px black;
+  color:white;
+
+}
+
+.container {
+width: 90%;
+max-width: 1200px;
+margin: 0 auto;
+}
+
+/* Header */
+.header {
+background:#fa9440;
+color: white;
+padding: 20px 0;
+text-align: center;
+font-size: 1.8rem;
+font-weight: bold;
+
+}
+/*login*/
+/* General reset for styling */
+body {
+  margin: 0;
+  padding: 0;
+}
+
+nav {
+  position: absolute;
+  top: 0;
+  right: 0;
+  
+}
+
+nav ul {
+  list-style-type: none; /* Removes bullet points */
+  margin: 0;
+  padding: 0;
+  
+ 
+}
+
+nav ul li {
+  display: inline; /* Inline positioning for list item */
+  
+}
+
+nav ul li a {
+  
+  text-decoration: none; /* Removes underline from link */
+  padding: 10px 15px;
+  background-color:black; /* Button background color */
+  color:whitesmoke; /* Text color */
+  border-radius: 5px; /* Rounded corners */
+  font-family:'Times New Roman'; /* Font style */
+  font-size: 14px; /* Font size */
+ 
+}
+
+nav ul li a:hover {
+  background-color: white; /* Darker shade on hover */
+  color: black;
+}
+
+
+/* Navigation Bar */
+.navbar {
+  margin-top: 10px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  width:100px;
+
+}
+
+.navbar ul {
+list-style: none;
+display: flex;
+justify-content: center;
+margin: 0;
+padding: 0;
+}
+
+.navbar ul li {
+margin: 0 15px;
+}
+
+.navbar ul li a {
+color:white;
+text-decoration: none;
+font-size: 1.2rem;
+font-weight: bold;
+}
+
+.navbar ul li a:hover {
+text-decoration: underline;
+}
+
+/* Sections with Background Images */
+.background-about {
+background: url('learning-background-1.jpg') no-repeat center center/cover;
+padding: 40px;
+color: white;
+border-radius: 8px;
+margin-top: 20px;
+}
+
+.background-features {
+background: url('learning-background-2.jpg') no-repeat center center/cover;
+padding: 40px;
+color: white;
+border-radius: 8px;
+margin-top: 20px;
+}
+
+.background-gallery {
+background: url('learning-background-3.jpg') no-repeat center center/cover;
+padding: 40px;
+color: white;
+border-radius: 8px;
+margin-top: 20px;
+}
+
+/* Gallery */
+.image-container {
+display: flex;
+gap: 20px;
+justify-content: center;
+flex-wrap: wrap;
+margin-bottom: 200px;
+}
+
+.image-container img {
+border: 2px solid #ddd;
+border-radius: 8px;
+transition: transform 0.3s ease;
+}
+
+.image-container img:hover {
+transform: scale(1.1);
+border-color: #de985f;
+}
+
+/* Footer */
+.footer {
+background:#de985f ;
+color: white;
+text-align: center;
+padding: 10px 0;
+margin-top: 20px;
+}
