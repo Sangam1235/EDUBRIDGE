@@ -21,7 +21,20 @@ body {
   text-align: center;
   color: #004aad;
   margin-bottom: 20px;
+  width: 96%;
 }
+
+/* Adjust width and padding for inputs */
+input[type="email"],
+input[type="password"] {
+  width: 100%; /* Set inputs to take full width of the container */
+  padding: 12px; /* Increase the padding inside inputs */
+  margin-bottom: 15px; /* Add space below each input */
+  border: 1px solid #ccc; /* Optional: Input border */
+  border-radius: 5px; /* Optional: Round the input corners */
+  box-sizing: border-box; /* Include padding in width calculations */
+}
+
 
 .login-container label {
   display: block;
