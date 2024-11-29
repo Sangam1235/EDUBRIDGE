@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NCERT PDF Audio Viewer</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #FFF2E6; /* Light orange */
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Align at the top */
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            width: 95%; /* Increased width for better display */
+            max-width: 1000px; /* Wider canvas */
+            border: 1px solid #ccc;
+            background: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        h1 {
+            margin: 0 0 20px;
+            font-size: 2.5rem; /* Larger font size for prominence */
+            color: #FF8C00; /* Orange */
+            text-align: center;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #FF8C00;
+        }
+
+        #pdf-canvas {
+            width: 100%; /* Full width of container */
+            height: 800px; /* Increased height to display a full page */
+            border: 2px solid #ddd;
+            margin: 20px 0;
+            background-color: #f9f9f9; /* Light background for contrast */
+        }
+
+        .button-container {
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            background-color: #FF8C00;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #e07b00;
+        }
+
+        input[type="file"] {
+            margin-bottom: 20px;
+            font-size: 1rem;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>PDF Text to Audio</h1>
+        <input type="file" id="upload" accept=".pdf" />
+        <canvas id="pdf-canvas"></canvas>
+        <div class="button-container">
+            <button id="prev-page">Previous Page</button>
+            <button id="next-page">Next Page</button>
+        </div>
+        <div class="button-container">
+            <button id="start-audio">Start Audio</button>
+            <button id="pause-audio">Pause Audio</button>
+            <button id="resume-audio">Resume Audio</button>
+        </div>
+    </div>
+
+    <script>
+        const upload = document.getElementById('upload');
+        const canvas = document.getElementById('pdf-canvas');
+        const context = canvas.getContext('2d');
+        const prevPage = document.getElementById('prev-page');
+        const nextPage = document.getElementById('next-page');
+        const startAudio = document.getElementById('start-audio');
+        const pauseAudio = document.getElementById('pause-audio');
+        const resumeAudio = document.getElementById('resume-audio');
+
+        let pdfDoc = null;
+        let currentPage = 1;
+        let pageTextContent = null;
+        let speechSynthesisInstance = null;
+        let isPaused = false;
+
+        // Upload and render PDF
+        upload.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (file && file.type === 'application/pdf') {
+                const fileReader = new FileReader();
+                fileReader.onload = () => {
+                    const typedarray = new Uint8Array(fileReader.result);
+                    pdfjsLib.getDocument(typedarray).promise.then((pdf) => {
+                        pdfDoc = pdf;
+                        currentPage = 1; // Reset to page 1
+                        renderPage(currentPage);
+                    });
+                };
+                fileReader.readAsArrayBuffer(file);
+            } else {
+                alert('Please upload a valid PDF file.');
+            }
+        });
+
+        // Render PDF page on canvas
+        function renderPage(pageNum) {
+            pdfDoc.getPage(pageNum).then((page) => {
+                const scale = 1.5; // Increased scale for better clarity
+                const viewport = page.getViewport({ scale: scale });
+
+                // Set canvas size
+                canvas.width = viewport.width;
+                canvas.height = viewport.height;
+
+                // Render page onto the canvas
+                page.render({
+                    canvasContext: context,
+                    viewport: viewport
+                });
+
+                // Extract text from the page
+                page.getTextContent().then((textContent) => {
+                    pageTextContent = textContent.items.map((item) => item.str).join(' ');
+                    if (speechSynthesisInstance) {
+                        speechSynthesis.cancel(); // Stop previous audio
+                    }
+                });
+            });
+        }
+
+        // Handle Next and Previous Page buttons
+        nextPage.addEventListener('click', () => {
+            if (currentPage < pdfDoc.numPages) {
+                currentPage++;
+                renderPage(currentPage);
+            } else {
+                alert('This is the last page.');
+            }
+        });
+
+        prevPage.addEventListener('click', () => {
+            if (currentPage > 1) {
+                currentPage--;
+                renderPage(currentPage);
+            } else {
+                alert('This is the first page.');
+            }
+        });
+
+        // Start Audio Button
+        startAudio.addEventListener('click', () => {
+            if (pageTextContent) {
+                if (speechSynthesisInstance) {
+                    speechSynthesis.cancel(); // Cancel any ongoing speech
+                }
+                speechSynthesisInstance = new SpeechSynthesisUtterance(pageTextContent);
+                speechSynthesisInstance.lang = 'en-US';
+                speechSynthesis.speak(speechSynthesisInstance);
+                isPaused = false;
+            } else {
+                alert('Please upload a PDF file first.');
+            }
+        });
+
+        // Pause Audio Button
+        pauseAudio.addEventListener('click', () => {
+            if (speechSynthesis.speaking && !isPaused) {
+                speechSynthesis.pause();
+                isPaused = true;
+            }
+        });
+
+        // Resume Audio Button
+        resumeAudio.addEventListener('click', () => {
+            if (speechSynthesis.speaking && isPaused) {
+                speechSynthesis.resume();
+                isPaused = false;
+            }
+        });
+    </script>
+</body>
+</html>

@@ -3,76 +3,242 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Inclusive Education Platform with Text-to-Speech for accessibility">
+  <meta name="description" content="Inclusive Education Platform with Text-to-Speech and Speech-to-Text for accessibility">
   <title>EDUBRIDGE - Inclusive Education Platform</title>
-  <link rel="stylesheet" href="vedha.css">
-  <base href="/public/">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f9;
+      color: #333;
+    }
+
+    header {
+      background-color: #bc7b2b;
+      color: white;
+      padding: 20px 0;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2.8rem;
+      margin: 0;
+    }
+
+    main {
+      padding: 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    section {
+      margin-bottom: 40px;
+    }
+
+    section h2 {
+      font-size: 2rem;
+      color: #bc7b2b;
+      text-align: center;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+
+    /* Adjust the section-container to handle flex items more evenly */
+    .section-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center; /* Ensure the items are centered */
+    }
+
+    /* Set width of feature-card to allow them to fit side-by-side */
+    .feature-card {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+      width: calc(33.33% - 20px); /* Three cards per row */
+      max-width: 500px;
+      transition: transform 0.3s, box-shadow 0.3s;
+      text-align: center;
+    }
+
+    /* Adjust hover effect */
+    .feature-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .feature-card h3 {
+      color: #d97a3b;
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+    }
+
+    .feature-card p {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #555;
+    }
+
+    .feature-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 20px 0;
+      color: #333;
+    }
+
+    .feature-card ul li {
+      margin-bottom: 10px;
+      font-size: 0.95rem;
+    }
+
+    .button-container {
+      margin-top: 20px;
+    }
+
+    .button-container a {
+      display: inline-block;
+      background-color: #d68553;
+      color: white;
+      padding: 10px 20px;
+      text-decoration: none;
+      font-size: 1rem;
+      border-radius: 8px;
+      transition: background-color 0.3s;
+    }
+
+    .button-container a:hover {
+      background-color: #bc7b2b;
+    }
+
+    footer {
+      text-align: center;
+      background-color: #333;
+      color: white;
+      padding: 10px 0;
+      margin-top: 40px;
+    }
+  </style>
 </head>
 
 <body>
-  <header class="header" data-tts="Welcome to EDUBRIDGE">
-    <center><h1>EDUBRIDGE</h1></center>
-  </header>  
-</section>
-  <main class="container">
-    <section id="about" tabindex="0">
-      <h2 class="heading" data-tts="About Us">About Us</h2>
-      <p class="paragraph" data-tts="Our platform ensures equal learning opportunities for everyone, including those with visual, hearing, or speech impairments.">
-        Our platform ensures equal learning opportunities for everyone, including those with visual, hearing, or speech impairments.
-      </p>
-    </section>
+  <header>
+    <h1 data-tts="Welcome to EDUBRIDGE">EDUBRIDGE</h1>
+  </header>
 
-    <section id="features" tabindex="0">
-      <h2  class="heading" data-tts="Features">Features</h2>
-      <ul class="paragraph">
-        <li data-tts="Screen reader-friendly navigation">Screen reader-friendly navigation</li>
-        <li data-tts="Text-to-speech tools">Text-to-speech tools</li>
-        <li data-tts="Keyboard-accessible interface">Keyboard-accessible interface</li>
-        <li data-tts="Alt text for images">Alt text for images</li>
-      </ul>
-    </section>
+  <main>
+    <!-- Section for Visually Impaired Features -->
+    <section id="visually-impaired">
+      <h2>Visually Impaired</h2>
+      <div class="section-container">
+        <!-- Feature Card 1 -->
+        <div class="feature-card" data-tts="Voice-Powered exam">
+          <h3>Voice-Powered Exam</h3>
+          <p>Read text aloud for visually impaired individuals.</p>
+          <ul>
+            <li>Instant reading of text content.</li>
+          </ul>
+          <div class="button-container">
+            <a href="audiotext.html" data-tts="give your exam from speech to text">Explore</a>
+          </div>
+        </div>
 
-    <section id="gallery" tabindex="0">
-      <h2 data-tts="Gallery"></h2>
-      <div class="image-container">
-        <img src="/photos/blind.jpg" alt="Blind student learning with Braille and a teacher guiding them" width="200" height="200" data-tts="Blind student learning with Braille and a teacher guiding them">
-        <img src="/photos/deaf.jpg" alt="Students using sign language for communication" width="200" height="200" data-tts="Students using sign language for communication">
-        <img src="/photos/autism.jpg" alt="Student watching visual video classes" width="200" height="200" data-tts="Student watching visual video classes">
+        <!-- Feature Card 2 -->
+        <div class="feature-card" data-tts="Audio NCERT Hub for Visually Impaired">
+          <h3>Audio NCERT Hub</h3>
+          <p>Audio-based NCERT resources for improved understanding.</p>
+          <ul>
+            <li>Chapter-wise audio lessons.</li>
+          </ul>
+          <div class="button-container">
+            <a href="audio.html" data-tts="Explore Audio NCERT Hub">Explore</a>
+          </div>
+        </div>
+
+        <!-- Feature Card 3 -->
+        <div class="feature-card" data-tts="convert">
+          <h3>Braille Learning Module</h3>
+          <p>Interactive tools and resources for mastering Braille.</p>
+          <ul>
+            <li>Step-by-step tutorials for Braille alphabets.</li>
+            <li>Practice sessions with real-time feedback.</li>
+          </ul>
+          <div class="button-container">
+            <a href="pdfreader.html" data-tts="Explore Braille Learning Module">Explore</a>
+          </div>
+        </div>
       </div>
     </section>
 
+    <!-- Section for Hearing Impaired Features -->
+    <section id="hearing-impaired">
+      <h2>Hearing Impaired</h2>
+      <div class="section-container">
+        <!-- Feature Card 1 -->
+        <div class="feature-card" data-tts="Note-Taking and viva for Hearing Impaired">
+          <h3>Note-Taking on the go & Viva Made Easy!</h3>
+          <p>Real-time transcription of spoken words to text.</p>
+          <ul>
+            <li>Accurate and fast speech recognition.</li>
+            <li>Compatible with various devices.</li>
+          </ul>
+          <div class="button-container">
+            <a href="speech.html" data-tts="Try Speech-to-Text">Explore</a>
+          </div>
+        </div>
+
+        <!-- Feature Card 2 -->
+        <div class="feature-card" data-tts="Sign Language Resources">
+          <h3>Sign Language Resources</h3>
+          <p>Interactive video tutorials and resources for sign language.</p>
+          <ul>
+            <li>Beginner to advanced tutorials.</li>
+            <li>Interactive signing quizzes.</li>
+          </ul>
+          <div class="button-container">
+            <a href="sign.html" data-tts="Learn Sign Language">Explore</a>
+          </div>
+        </div>
+
+        <!-- Feature Card 3 -->
+        <div class="feature-card" data-tts="Bite-Sized Lessons & Flashcard Fun">
+          <h3>Bite-Sized Lessons & Flashcard Fun!</h3>
+          <p>Access theory in small segments with Interactive flashcards to test your knowledge</p>
+          <ul>
+            <li>Chapter-wise theory</li>
+            <li>Flashcard Quiz</li>
+          </ul>
+          <div class="button-container">
+            <a href="main.html" data-tts="opening for Bite-Sized Lessons & Flashcard Fun">Explore</a>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <footer class="footer">
+  <footer>
     <p data-tts="Copyright 2024 Inclusive Education Platform.">© 2024 Inclusive Education Platform. All rights reserved.</p>
   </footer>
 
+  <!-- JavaScript for Voice-Over -->
+  <script>
+    const synth = window.speechSynthesis;
 
- <!-- JavaScript for Text-to-Speech -->
- <script>
+    function speakText(text) {
+      if (synth.speaking) synth.cancel(); // Stop ongoing speech
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.rate = 1; // Adjust speed of speech
+      synth.speak(utterance);
+    }
 
-  const synth = window.speechSynthesis;
-
-
-  function speakText(text) {
-    if (synth.speaking) synth.cancel(); // Stop ongoing speech
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.rate = 1; 
-    synth.speak(utterance);
-  }
-
-
-  document.querySelectorAll("[data-tts]").forEach(element => {
-    element.addEventListener("click", () => {
-      const text = element.getAttribute("data-tts");
-      speakText(text);
+    document.querySelectorAll("[data-tts]").forEach(element => {
+      element.addEventListener("click", () => {
+        const text = element.getAttribute("data-tts");
+        speakText(text);
+      });
     });
-    element.addEventListener("focus", () => {
-      const text = element.getAttribute("data-tts");
-      speakText(text);
-    });
-  });
-</script>
-
+  </script>
 </body>
 </html>

@@ -8,7 +8,7 @@
 </head>
 <body>
   <div class="login-container">
-    <h1>Login</h1>
+    <h1 data-tts="login">Login</h1>
     <form id="login-form" action="/login" method="POST">
       <label for="email" data-tts="Enter your email">Email</label>
       <input  class="star"  type="email" id="email" name="email" placeholder="Enter your email" data-tts="Type your email here" required>
@@ -19,8 +19,67 @@
       <button type="submit" id="login-button" data-tts="Click to log in">Login</button>
     </form>
 
-    <p>Don't have an account? <a href="newregister.html" data-tts="Click here to register">REGISTER HERE</a></p>
+    <p>Don't have an account? <a href="newregister.html" data-tts="opening registration page">REGISTER HERE</a></p>
   </div>
+  <script>
+    const synth = window.speechSynthesis;
+  
+    function speakText(text) {
+      if (synth.speaking) synth.cancel(); 
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.rate = 1; 
+      synth.speak(utterance);
+    }
+  
+    
+    document.querySelectorAll("[data-tts]").forEach(element => {
+      element.addEventListener("click", () => {
+        const text = element.getAttribute("data-tts");
+        speakText(text);
+      });
+  
+      element.addEventListener("focus", () => {
+        const text = element.getAttribute("data-tts");
+        speakText(text);
+      });
+    });
+  
+    
+    document.addEventListener("keydown", (event) => {
+      let key = event.key;
+  
+      
+      const specialKeys = {
+        ".": "dot",
+        ",": "comma",
+        "@": "at",
+        "#": "hash",
+        "$": "dollar",
+        "%": "percent",
+        "&": "ampersand",
+        "*": "asterisk",
+        "(": "opening parenthesis",
+        ")": "closing parenthesis",
+        "-": "dash",
+        "_": "underscore",
+        "=": "equals",
+        "+": "plus",
+        "/": "slash",
+        "\\": "backslash",
+        "|": "vertical bar",
+        ";": "semicolon",
+        ":": "colon",
+        "'": "single quote",
+        "\"": "double quote",
+        "?": "question mark",
+        "!": "exclamation mark",
+      };
+  
+      
+      const spokenText = specialKeys[key] || key;
+      speakText(spokenText);
+    });
+  </script>
 
   
 

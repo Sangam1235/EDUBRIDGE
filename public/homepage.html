@@ -1,86 +1,135 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Inclusive Education Platform with Text-to-Speech for accessibility">
-  <title>EDUBRIDGE - Inclusive Education Platform</title>
-  <link rel="stylesheet" href="vedha.css">
-  <base href="/public/">
+  <meta name="description" content="Edubridge - Inclusive Educational Platform">
+  <title>Edubridge</title>
+  <link rel="stylesheet" href="homepage.css">
 </head>
-
 <body>
-  <header class="header" data-tts="Welcome to EDUBRIDGE">
-    <center><h1>EDUBRIDGE</h1></center>
+  <!-- Header Section -->
+  <header class="header">
+    <div class="logo-container">
+      <img src="photos/logo.jpg" alt="Edubridge Logo" class="logo">
+      <h1 tabindex="0" data-tts="Welcome to Edubridge">EDUBRIDGE</h1>
+    </div>
+    <nav class="navbar" aria-label="Main Navigation">
+          <a href="/login.html" class="login-button " data-tts="Navigate to Login Page" id="login-link">Login</a>
+    </nav>
   </header>
-  <nav class="navbar" aria-label="Main Navigation">
+
+  <!-- Navigation -->
+  <nav class="navbar">
     <ul>
-      <li>
-        <a href="/login.html" data-tts="Navigate to Login Page" id="login-link">Login</a>
-      </li>
+      <li><a href="#about" tabindex="0" data-tts="About Us">About Us</a></li>
+      <li><a href="#features" tabindex="0" data-tts="Features">Features</a></li>
+      <li><a href="#inspiration" tabindex="0" data-tts="Inspiration Corner">Inspiration Corner</a></li>
+      <li><a href="#connect" tabindex="0" data-tts="Connect">Connect</a></li>
+      <li><a href="#contact" tabindex="0" data-tts="Contact Us">Contact Us</a></li>
     </ul>
   </nav>
-   
-</section>
-  <main class="container">
+
+  <!-- Half Background Image Section -->
+  <section class="background-section">
+    <div class="overlay">
+      <p tabindex="0" data-tts="Empowering Education for All."></p>
+    </div>
+  </section>
+
+  <!-- Main Content --><main class="container">
+    <!-- About Us Section -->
     <section id="about" tabindex="0">
-      <h2 class="heading" data-tts="About Us">About Us</h2>
-      <p class="paragraph" data-tts="Our platform ensures equal learning opportunities for everyone, including those with visual, hearing, or speech impairments.">
-        Our platform ensures equal learning opportunities for everyone, including those with visual, hearing, or speech impairments.
+      <h2 data-tts="About Us">About Us</h2>
+      <p data-tts="Our mission is to provide an accessible learning platform for all, ensuring inclusivity for students with disabilities.">
+        Our mission is to provide an accessible learning platform for all, ensuring inclusivity for students with disabilities.
+      </p>
+      <p data-tts="With EDUBRIDGE, we focus on breaking barriers to education and empowering learners through technology and innovation.">
+        With EDUBRIDGE, we focus on breaking barriers to education and empowering learners through technology and innovation.
       </p>
     </section>
 
+    <!-- Features Section -->
     <section id="features" tabindex="0">
-      <h2  class="heading" data-tts="Features">Features</h2>
-      <ul class="paragraph">
+      <h2 data-tts="Features">Features</h2>
+      <ul>
         <li data-tts="Screen reader-friendly navigation">Screen reader-friendly navigation</li>
-        <li data-tts="Text-to-speech tools">Text-to-speech tools</li>
-        <li data-tts="Keyboard-accessible interface">Keyboard-accessible interface</li>
-        <li data-tts="Alt text for images">Alt text for images</li>
+        <li data-tts="Text-to-speech tools for instant content access">Text-to-speech tools for instant content access</li>
+        <li data-tts="Keyboard-accessible interface for easy navigation">Keyboard-accessible interface for easy navigation</li>
+        <li data-tts="audio ncert hub">Audio-NCERT HUB</li>
       </ul>
     </section>
 
-    <section id="gallery" tabindex="0">
-      <h2 data-tts="Gallery"></h2>
-      <div class="image-container">
-        <img src="/photos/blind.jpg" alt="Blind student learning with Braille and a teacher guiding them" width="200" height="200" data-tts="Blind student learning with Braille and a teacher guiding them">
-        <img src="/photos/deaf.jpg" alt="Students using sign language for communication" width="200" height="200" data-tts="Students using sign language for communication">
-        <img src="/photos/autism.jpg" alt="Student watching visual video classes" width="200" height="200" data-tts="Student watching visual video classes">
-      </div>
-    </section>
+<section id="inspiration-corner" tabindex="0">
+  <h2 data-tts="Inspiration Corner">Inspiration Corner</h2>
+  <p data-tts="Here are the individual stories of people overcoming obstacles.">
+      Here are the individual stories of people overcoming obstacles.</p>
+      <a href="inspiration.html" class="inspiration-button" data-tts="Learn More">Learn More</a>
+  
+</section>
 
-  </main>
 
-  <footer class="footer">
-    <p data-tts="Copyright 2024 Inclusive Education Platform.">© 2024 Inclusive Education Platform. All rights reserved.</p>
+  <section id="connect" class="section" tabindex="0" data-tts="Connect Section">
+    <h2>Connect</h2>
+    <p>Want to learn more? Get in touch with us through our Connect platform.</p>
+    <a href="connect.html" class="connect-button" data-tts="Learn More">Learn More</a>
+  </section>
+
+  <section id="contact" class="section" tabindex="0" data-tts="Contact Us Section">
+    <h2>Contact Us</h2>
+    <form>
+      <label for="name">Name:</label>
+      <input type="text" id="name" data-tts="Name Input Field" oninput="speakInput(this.value)">
+      <label for="email">Email:</label>
+      <input type="email" id="email" data-tts="Email Input Field" oninput="speakInput(this.value)">
+      <label for="message">Message:</label>
+      <textarea id="message" rows="5" data-tts="Message Input Field" oninput="speakInput(this.value)"></textarea>
+      <button type="submit" data-tts="Submit Button">Submit</button>
+    </form>
+  </section>
+</main>
+  <!-- Footer -->
+  <footer>
+    <p tabindex="0" data-tts="Copyright 2024 Edubridge">© 2024 Edubridge. All rights reserved.</p>
   </footer>
 
+  <!-- JavaScript for Voice and Navigation -->
+  <script>
+    const synth = window.speechSynthesis;
 
- <!-- JavaScript for Text-to-Speech -->
- <script>
+    // Function to speak text
+    function speakText(text) {
+      if (synth.speaking) synth.cancel();
+      const utterance = new SpeechSynthesisUtterance(text);
+      synth.speak(utterance);
+    }
 
-  const synth = window.speechSynthesis;
-
-
-  function speakText(text) {
-    if (synth.speaking) synth.cancel(); // Stop ongoing speech
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.rate = 1; 
-    synth.speak(utterance);
-  }
-
-
-  document.querySelectorAll("[data-tts]").forEach(element => {
-    element.addEventListener("click", () => {
-      const text = element.getAttribute("data-tts");
-      speakText(text);
+    // Add voice to all elements with data-tts attribute
+    document.querySelectorAll("[data-tts]").forEach(element => {
+      element.addEventListener("focus", () => speakText(element.getAttribute("data-tts")));
+      element.addEventListener("click", () => speakText(element.getAttribute("data-tts")));
     });
-    element.addEventListener("focus", () => {
-      const text = element.getAttribute("data-tts");
-      speakText(text);
-    });
-  });
-</script>
 
+    // Speak input field content
+    function speakInput(text) {
+      speakText(text);
+    }
+
+    // Smooth scrolling
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener("click", function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute("href")).scrollIntoView({
+          behavior: "smooth"
+        });
+      });
+    });
+
+    // Navigate to a new page
+    function navigateToPage() {
+      window.location.href = "nextpage.html";
+    }
+  </script>
 </body>
 </html>

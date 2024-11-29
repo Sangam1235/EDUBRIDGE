@@ -1,0 +1,136 @@
+/* General Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  background-color: #f4f4f9;
+  color: #333;
+}
+
+/* Header and Logo */
+.header {
+  background-color:orange;
+  color:black;
+  padding: 50px;
+  display: flex;
+  justify-content:center;
+  align-items: center;
+}
+
+.logo {
+  width: 100px;
+}
+
+h1 {
+  font-size: 5.5rem;
+  margin-left: 10px;
+}
+
+/* Login Button */
+.login-container {
+  margin-right: 20px;
+}
+
+.login-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 12px 25px;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  background: linear-gradient(45deg, #191918, #81736e); /* Gradient background */
+  border: none;
+  border-radius: 50px; /* Sleek rounded edges */
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
+  transition: all 0.3s ease; /* Smooth transitions for hover effects */
+  text-align: center;
+  text-decoration: none;
+}
+
+.login-button:hover {
+  background: linear-gradient(45deg, #161515, #575047); /* Reverse gradient on hover */
+  transform: scale(1.1); /* Slightly enlarge the button */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4); /* Enhance shadow on hover */
+}
+
+
+
+/* Navigation */
+.navbar ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  background-color:BLACK;
+  padding: 10px;
+}
+
+.navbar ul li {
+  margin: 0 15px;
+}
+
+.navbar ul li a {
+  color: white;
+  font-size: 18px;
+}
+
+.navbar ul li a:hover {
+  color: #ddd;
+}
+
+/* Background Section */
+.background-section {
+  background: url('photos/disable.webp') no-repeat center center/cover;
+  height: 50vh;
+  position: relative;
+}
+
+.white-space {
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+/* Logo and Title Styling */
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo {
+  width: 100px;
+}
+
+h1 {
+  font: size 4px;;
+  margin: 0;
+}
+
+/* Login Button */
+.login-button {
+  position: absolute;
+  right: 30px;
+  top: 30px;
+  padding: 10px 20px;
+  background-color:BLACK;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+.login-button:hover {
+  background-color:black;
+}

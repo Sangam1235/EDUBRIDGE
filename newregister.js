@@ -80,20 +80,6 @@ app.get('/login.html', (req, res) => {
 //   }
 // });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // Route to serve registration page
 app.get('/newregister.html', (req, res) => {
   res.sendFile(__dirname + '/public/newregister.html'); // Ensure this path points to your newregister.html file

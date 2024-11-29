@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quadratic Equations for Deaf Students</title>
+    <link rel="stylesheet" href="design.css">
+</head>
+
+<body>
+    <header class="header">
+        <h1>Quadratic Equations for Deaf Students</h1>
+    </header>
+
+    <main>
+        <!-- Theory Section -->
+        <section id="theory" class="theory-section">
+            <h2 class="section-title">Theory</h2>
+            <p>Select a part to view the corresponding theory in PDF format:</p>
+            <div class="button-group">
+                <button onclick="loadPart1()">Part 1: Basics</button>
+                <button onclick="loadPart2()">Part 2: Factoring</button>
+                <button onclick="loadPart3()">Part 3: Discriminants</button>
+                <button onclick="loadPart4()">Part 4: Applications</button>
+            </div>
+            <iframe id="pdf-viewer" class="pdf-viewer"></iframe>
+        </section>
+
+        <!-- Flashcards Section -->
+        <section id="flashcards" class="flashcards-section">
+            <h2 class="section-title">Flashcards</h2>
+            <p>Select a part to load the corresponding flashcards:</p>
+            <div class="button-group">
+                <button onclick="loadFlashcardsPart1()">Part 1 Questions</button>
+                <button onclick="loadFlashcardsPart2()">Part 2 Questions</button>
+                <button onclick="loadFlashcardsPart3()">Part 3 Questions</button>
+                <button onclick="loadFlashcardsPart4()">Part 4 Questions</button>
+            </div>
+            <div id="flashcard-container" class="flashcard-container"></div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; Edubridge</p>
+    </footer>
+
+    <script src="logic.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive PDF Viewer with Speech</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script> <!-- For saving files -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script> <!-- For saving PDF -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f9;
+            flex-direction: column;
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: #FF8C00;
+            margin-top: 20px;
+        }
+
+        .container {
+            display: flex;
+            width: 80%;
+            height: 90%;
+            border: 1px solid #ccc;
+            background: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .left, .right {
+            flex: 1;
+            padding: 20px;
+            overflow: auto;
+        }
+
+        .left {
+            border-right: 1px solid #ddd;
+        }
+
+        h2 {
+            margin: 0 0 10px;
+            font-size: 1.2rem;
+            color: #333;
+        }
+
+        #pdf-canvas {
+            width: 100%;
+            height: 100%;
+        }
+
+        textarea {
+            width: 100%;
+            height: 60%;
+            font-size: 1rem;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        button {
+            margin: 5px;
+            padding: 10px;
+            font-size: 1rem;
+            background-color: #FF8C00;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #e07b00;
+        }
+
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Voice-powered exam</h1>
+    <div class="container">
+        <div class="left">
+            <h2>Question Paper</h2>
+            <input type="file" id="upload" accept=".pdf" />
+            <canvas id="pdf-canvas"></canvas>
+            <div class="button-container">
+                <button id="start-audio">Start Audio</button>
+                <button id="stop-audio">Stop Audio</button>
+            </div>
+        </div>
+        <div class="right">
+            <h2>Answer Section</h2>
+            <textarea id="answer-box" placeholder="Your answer will appear here..."></textarea>
+            <div class="button-container">
+                <button id="start-speech">Start Speech</button>
+                <button id="stop-speech">Stop Speech</button>
+                
+                <button id="save-to-pdf">Save to PDF</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const upload = document.getElementById('upload');
+        const canvas = document.getElementById('pdf-canvas');
+        const context = canvas.getContext('2d');
+        const answerBox = document.getElementById('answer-box');
+        const startAudio = document.getElementById('start-audio');
+        const stopAudio = document.getElementById('stop-audio');
+        const startSpeech = document.getElementById('start-speech');
+        const stopSpeech = document.getElementById('stop-speech');
+        const saveToPdf = document.getElementById('save-to-pdf');
+
+        let currentPage = 1;
+        let pdfDoc = null;
+        let isListening = false;
+        let recognition;
+        let pageTextContent = '';
+        let answerLog = ''; // To store all answers
+        let speechSynthesisUtterance = null;
+
+        // Initialize Speech Recognition (Speech-to-Text)
+        try {
+            recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+            recognition.lang = 'en-US';
+            recognition.onresult = (event) => {
+                const transcript = event.results[0][0].transcript;
+                answerBox.value += transcript + ' ';
+            };
+            recognition.onerror = (event) => {
+                console.error("Speech Recognition Error:", event.error);
+            };
+        } catch (error) {
+            alert('Speech Recognition is not supported in this browser.');
+        }
+
+        // Upload PDF and render on canvas
+        upload.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (file && file.type === 'application/pdf') {
+                const fileReader = new FileReader();
+                fileReader.onload = () => {
+                    const typedarray = new Uint8Array(fileReader.result);
+                    pdfjsLib.getDocument(typedarray).promise.then((pdf) => {
+                        pdfDoc = pdf;
+                        renderPage(currentPage);
+                    });
+                };
+                fileReader.readAsArrayBuffer(file);
+            } else {
+                alert('Please upload a valid PDF file.');
+            }
+        });
+
+        // Render PDF page on canvas
+        function renderPage(pageNum) {
+            pdfDoc.getPage(pageNum).then((page) => {
+                const scale = 1.5;
+                const viewport = page.getViewport({ scale: scale });
+
+                canvas.width = viewport.width;
+                canvas.height = viewport.height;
+
+                page.render({
+                    canvasContext: context,
+                    viewport: viewport
+                });
+
+                // Extract text content for audio
+                page.getTextContent().then((textContent) => {
+                    pageTextContent = textContent.items.map(item => item.str).join(' ');
+                });
+            });
+        }
+
+        // Start Audio (TTS)
+        startAudio.addEventListener('click', () => {
+            if (pageTextContent) {
+                speechSynthesisUtterance = new SpeechSynthesisUtterance(pageTextContent);
+                speechSynthesisUtterance.lang = 'en-US';
+                speechSynthesis.speak(speechSynthesisUtterance);
+                speak("Start Audio");
+            }
+        });
+
+        // Stop Audio (TTS)
+        stopAudio.addEventListener('click', () => {
+            if (speechSynthesis.speaking) {
+                speechSynthesis.cancel();
+                speak("Stop Audio");
+            }
+        });
+
+        // Start Speech-to-Text
+        startSpeech.addEventListener('click', () => {
+            speak("Start Speech");
+            if (recognition && !isListening) {
+                recognition.start();
+                isListening = true;
+            }
+        });
+
+        // Stop Speech-to-Text
+        stopSpeech.addEventListener('click', () => {
+            speak("Stop Speech");
+            if (recognition && isListening) {
+                recognition.stop();
+                isListening = false;
+            }
+        });
+
+
+        // Save to PDF
+        saveToPdf.addEventListener('click', () => {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF(); // Create a new PDF document
+            const text = answerBox.value; // Get the text from the answer box
+            doc.text('Page ${currentPage} Answer:', 10, 10); // Add a title for the page
+            doc.text(text, 10, 20); // Add the answer text at position (10, 20)
+            doc.save('Answers.pdf');  // Save as a PDF with the filename 'Answers.pdf'
+            speak("Your answers have been saved to a PDF document.");
+        });
+
+        // Speak text
+        function speak(text) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'en-US';
+            speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>

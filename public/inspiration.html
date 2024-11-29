@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inspiration Corner</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fffaf3;
+            color: #4a4a4a;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #ffa726;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        .container {
+            padding: 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+        .card {
+            background-color: #fff4e1;
+            border: 1px solid #ffd399;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card h3 {
+            color: #e65100;
+            margin: 0;
+        }
+        .card p {
+            margin: 10px 0;
+        }
+        .card a {
+            color: #d84315;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .card a:hover {
+            text-decoration: underline;
+        }
+        .voice-btn {
+            background-color: #ffa726;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 15px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        .voice-btn:hover {
+            background-color: #f57c00;
+        }
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #ffa726;
+            color: white;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 onclick="speak('Welcome to Inspiration Corner')">Inspiration Corner</h1>
+        <p onclick="speak('Celebrating the remarkable achievements of blind and deaf individuals worldwide')">
+            Celebrating the remarkable achievements of blind and deaf individuals worldwide
+        </p>
+    </header>
+    <div class="container" id="inspiration-container">
+        <!-- Cards will be dynamically generated here -->
+    </div>
+   
+    <footer>
+        <p onclick="speak('Thank you for visiting Inspiration Corner. See you again soon!')">
+            &copy; 2024 Inspiration Corner. All rights reserved.
+        </p>
+    </footer>
+
+    <script>
+        // Data array for achievements
+        const achievements = [
+            {
+                name: "Helen Keller",
+                description: "The first deaf-blind person to earn a Bachelor of Arts degree and a lifelong advocate for people with disabilities.",
+                videoLink: "https://www.youtube.com/watch?v=8ch_H8pt9M8"
+            },
+            {
+                name: "Marla Runyan",
+                description: "A legally blind athlete who competed in the Olympics and is an inspiration for perseverance and determination.",
+                videoLink: "https://www.youtube.com/watch?v=H9Gk8JIbyLg"
+            },
+            {
+                name: "Ludwig van Beethoven",
+                description: "One of the greatest composers in history, who continued to compose music despite being deaf.",
+                videoLink: "https://www.youtube.com/watch?v=W-fFHeTX70Q"
+            },
+            {
+                name: "Haben Girma",
+                description: "The first deaf-blind graduate of Harvard Law School and an advocate for equal opportunities.",
+                videoLink: "https://www.youtube.com/watch?v=R2fG7CNppXg"
+            },
+            {
+        name: "Shekar Naik",
+        description: "A blind cricketer who led the Indian team to win the Blind Cricket World Cup in 2012 and 2014.",
+        videoLink: "https://www.youtube.com/watch?v=jNMypJPGu9E"
+    },
+    {
+        name: "Arunima Sinha",
+        description: "The first female amputee to climb Mount Everest, an inspiring example of determination and courage.",
+        videoLink: "https://www.youtube.com/watch?v=bsByzoqShN0"
+    },
+    {
+        name: "Dr. Sai Kaustuv Dasgupta",
+        description: "A wheelchair warrior who overcame brittle bone disease to become a motivational speaker, author, and graphic designer.",
+        videoLink: "https://www.youtube.com/watch?v=8y2mEiwB8iM"
+    },
+    {
+        name: "Preethi Srinivasan",
+        description: "A former national-level swimmer who became quadriplegic but is now an inspirational speaker and founder of Soulfree.",
+        videoLink: "https://www.youtube.com/watch?v=_NBebMLt5mI"
+    },
+        ];
+
+        const container = document.getElementById('inspiration-container');
+
+        // Function to create cards dynamically
+        achievements.forEach((person, index) => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <h3>${person.name}</h3>
+                <p>${person.description}</p>
+                <a href="${person.videoLink}" target="_blank">Watch on YouTube</a>
+                <button class="voice-btn" onclick="readAloud(${index})">Listen</button>
+            `;
+            container.appendChild(card);
+        });
+
+        // Voiceover Functionality
+        function readAloud(index) {
+            const person = achievements[index];
+            const message = new SpeechSynthesisUtterance(
+                `Name: ${person.name}. Description: ${person.description}.`
+            );
+            window.speechSynthesis.speak(message);
+        }
+         // Global speak function for voiceover
+         function speak(text) {
+            const message = new SpeechSynthesisUtterance(text);
+            message.lang = 'en-US';
+            window.speechSynthesis.speak(message);
+        }
+    </script>
+</body>
+</html>

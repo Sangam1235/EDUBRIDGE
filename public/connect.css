@@ -1,0 +1,101 @@
+/* General styles */
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #FFF2E6; /* light orange */
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.container {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 90%;
+  max-width: 600px;
+}
+
+/* Header */
+h1 {
+  text-align: center;
+  color: #FF8C00; /* orange */
+  margin-bottom: 20px;
+}
+
+/* Form styles */
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width:90%;
+}
+
+textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: none;
+  min-height: 100px;
+  outline: none;
+}
+
+textarea:focus {
+  border-color: #FF8C00; /* orange */
+}
+
+button {
+  padding: 10px;
+  background-color: #FF8C00; /* orange */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  width:105%;
+}
+
+button:hover {
+  background-color: #E07B00; /* darker orange */
+}
+
+/* Comment Section */
+.comment-section {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.comment {
+  background-color: #FFF2E6; /* light orange */
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  position: relative;
+  font-size: 14px;
+}
+
+.comment::before {
+  content: "";
+  width: 5px;
+  height: 100%;
+  background-color: #FF8C00; /* orange */
+  position: absolute;
+  left: 0;
+  top: 0;
+  border-radius: 5px 0 0 5px;
+}
+
+.no-comments {
+  text-align: center;
+  color: #777;
+  font-style: italic;
+}
